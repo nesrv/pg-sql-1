@@ -93,4 +93,4 @@ INSERT INTO Products
 VALUES('Desire 12', 'HTC', 8, 21000) RETURNING id;
 ```
 
-![alt text](image-15.png)
+![alt text](img/image-15.png)

@@ -64,4 +64,4 @@ FROM Products;
 Второй столбец сохраняет свое название - `Manufacturer`. Третий столбец `TotalSum` хранит произведение столбцов `ProductCount` и `Price`.
 
 
-![alt text](image-16.png)
+![alt text](img/image-16.png)
