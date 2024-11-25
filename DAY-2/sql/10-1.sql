@@ -1,0 +1,24 @@
+CREATE TABLE Products
+(
+    Id SERIAL PRIMARY KEY,
+    ProductName VARCHAR(30) NOT NULL,
+    Company VARCHAR(20) NOT NULL,
+    ProductCount INTEGER DEFAULT 0,
+    Price NUMERIC NOT NULL
+);
+
+
+CREATE TABLE Customers
+(
+    Id SERIAL PRIMARY KEY,
+    FirstName VARCHAR(30) NOT NULL
+);
+CREATE TABLE Orders
+(
+    Id SERIAL PRIMARY KEY,
+    ProductId INTEGER NOT NULL REFERENCES Products(Id) ON DELETE CASCADE,
+    CustomerId INTEGER NOT NULL REFERENCES Customers(Id) ON DELETE CASCADE,
+    CreatedAt DATE NOT NULL,
+    ProductCount INTEGER DEFAULT 1,
+    Price NUMERIC NOT NULL
+);

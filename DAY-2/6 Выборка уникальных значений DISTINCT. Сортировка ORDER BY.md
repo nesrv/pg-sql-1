@@ -5,16 +5,18 @@
 
 Например, в таблице товаров разные товары могут иметь одних и тех же производителей. Например, у нас следующая таблица:
 
+[Файл 6-1.sql](sql/6-1.sql)
+
 ```sql
 CREATE TABLE Products
 (
     Id SERIAL PRIMARY KEY,
     ProductName VARCHAR(30) NOT NULL,
-    Manufacturer VARCHAR(20) NOT NULL,
+    Company VARCHAR(20) NOT NULL,
     ProductCount INTEGER DEFAULT 0,
     Price NUMERIC
 );
-INSERT INTO Products  (ProductName, Manufacturer, ProductCount, Price)
+INSERT INTO Products  (ProductName, Company, ProductCount, Price)
 VALUES
 ('iPhone X', 'Apple', 2, 71000),
 ('iPhone 8', 'Apple', 3, 56000),
@@ -28,7 +30,7 @@ VALUES
 Выберем всех производителей:
 
 ```sql
-SELECT DISTINCT Manufacturer FROM Products;
+SELECT DISTINCT Company FROM Products;
 ```
 
 # ORDER BY. Сортировка
@@ -38,7 +40,7 @@ SELECT * FROM Products
 ORDER BY ProductCount;
 ```
 
-Также можно производить упорядочивание данных по псевдониму столбца, который определяется с помощью оператора AS:
+Также можно производить упорядочивание данных по псевдониму столбца, который определяется с помощью оператора `AS`:
 
 ```sql
 SELECT ProductName, ProductCount * Price AS TotalSum
@@ -54,48 +56,48 @@ FROM Products
 ORDER BY ProductCount * Price;
 ```
 
-Сортировка по убыванию
+## Сортировка по убыванию
 
 По умолчанию данные сортируются по возрастанию, однако с помощью оператора `DESC` можно задать сортировку по убыванию.
 
 
 ```sql
-SELECT ProductName, Manufacturer
+SELECT ProductName, Company
 FROM Products
-ORDER BY Manufacturer DESC;
+ORDER BY Company DESC;
 ```
 
 По умолчанию вместо `DESC` используется оператор `ASC`, который сортирует по возрастанию:
 
 ```sql
-SELECT ProductName, Manufacturer
+SELECT ProductName, Company
 FROM Products
-ORDER BY Manufacturer ASC;
+ORDER BY Company ASC;
 ```
 
-Сотировка по нескольким столбцам
+## Сотировка по нескольким столбцам
 
 
 Если необходимо отсортировать сразу по нескольким столбцам, то все они перечисляются через запятую после оператора `ORDER BY`:
 
 
 ```sql
-SELECT ProductName, Price, Manufacturer
+SELECT ProductName, Price, Company
 FROM Products
-ORDER BY Manufacturer, ProductName;
+ORDER BY Company, ProductName;
 ```
 
 
 
-В этом случае сначала строки сортируются по столбцу `Manufacturer` по возрастанию. 
+В этом случае сначала строки сортируются по столбцу `Company` по возрастанию. 
 
-Затем если есть две строки, в которых столбец `Manufacturer` имеет одинаковое значение, то они сортируются по столбцу `ProductName` также по возрастанию. 
+Затем если есть две строки, в которых столбец `Company` имеет одинаковое значение, то они сортируются по столбцу `ProductName` также по возрастанию. 
 
 Но опять же с помощью `ASC` и `DESC` можно отдельно для разных столбцов определить сортировку по возрастанию и убыванию:
 
 
 ```sql
-SELECT ProductName, Price, Manufacturer
+SELECT ProductName, Price, Company
 FROM Products
-ORDER BY Manufacturer ASC, ProductName DESC;
+ORDER BY Company ASC, ProductName DESC;
 ```

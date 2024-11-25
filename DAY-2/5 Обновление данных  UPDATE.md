@@ -28,8 +28,8 @@ SET Price = Price + 3000;
 
 ```sql
 UPDATE Products
-SET Manufacturer = 'Samsung Inc.'
-WHERE Manufacturer = 'Samsung';
+SET Company = 'Samsung Inc.'
+WHERE Company = 'Samsung';
 ```
 
 Также можно обновлять сразу несколько столбцов:
@@ -37,7 +37,7 @@ WHERE Manufacturer = 'Samsung';
 
 ```sql
 UPDATE Products
-SET Manufacturer = 'Samsung',
+SET Company = 'Samsung',
     ProductCount = ProductCount + 3
-WHERE Manufacturer = 'Samsung Inc.';
+WHERE Company = 'Samsung Inc.';
 ```

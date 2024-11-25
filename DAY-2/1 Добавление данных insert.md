@@ -1,14 +1,16 @@
 # Добавление данных. Команда Insert
 
 
-Для добавления данных применяется команда `INSERT`, которая имеет следующий формальный синтаксис:
+Для добавления данных применяется команда `INSERT`:
+
+[Файл 1-1.sql](sql/1-1.sql)
 
 ```sql
 CREATE TABLE Products
 (
     Id SERIAL PRIMARY KEY,
     ProductName VARCHAR(30) NOT NULL,
-    Manufacturer VARCHAR(20) NOT NULL,
+    Company VARCHAR(20) NOT NULL,
     ProductCount INTEGER DEFAULT 0,
     Price NUMERIC
 );
@@ -33,7 +35,7 @@ INSERT INTO Products VALUES (1, 'Galaxy S9', 'Samsung', 4, 63000)
 
 * ProductName: 'Galaxy S9'
 
-* Manufacturer: 'Samsung'
+* Company: 'Samsung'
 
 * ProductCount: 4
 
@@ -42,11 +44,10 @@ INSERT INTO Products VALUES (1, 'Galaxy S9', 'Samsung', 4, 63000)
 Также при вводе значений можно указать непосредственные столбцы, в которые будут добавляться значения:
 
 ```sql
-INSERT INTO Products (ProductName, Price, Manufacturer) 
+INSERT INTO Products (ProductName, Price, Company) 
 VALUES ('iPhone X', 71000, 'Apple');
 
 ```
-
 
 Здесь значение указывается только для трех столбцов. 
 
@@ -54,7 +55,7 @@ VALUES ('iPhone X', 71000, 'Apple');
 
 * `ProductName`: 'iPhone X'
 
-* `Manufacturer`: 'Apple'
+* `Company`: 'Apple'
 
 * `Price`: 71000
 
@@ -71,13 +72,15 @@ VALUES ('iPhone X', 71000, 'Apple');
 Также мы можем добавить сразу несколько строк:
 
 ```sql
-INSERT INTO Products  (ProductName, Manufacturer, ProductCount, Price)
+INSERT INTO Products  (ProductName, Company, ProductCount, Price)
 VALUES
 ('iPhone 6', 'Apple', 3, 36000),
 ('Galaxy S8', 'Samsung', 2, 46000),
 ('Galaxy S8 Plus', 'Samsung', 1, 56000)
-
 ```
+
+
+[Файл 1-2.sql](sql/1-2.sql)
 
 В данном случае в таблицу будут добавлены три строки.
 
@@ -91,7 +94,7 @@ VALUES
 
 ```sql
 INSERT INTO Products 
-(ProductName, Manufacturer, ProductCount, Price) 
+(ProductName, Company, ProductCount, Price) 
 VALUES('Desire 12', 'HTC', 8, 21000) RETURNING id;
 ```
 

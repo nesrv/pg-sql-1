@@ -1,8 +1,7 @@
 # Фильтрация. WHERE
 
 
-
-Для фильтрации данных применяется оператор WHERE, после которого указывается условие, на основании которого производится фильтрация:
+Для фильтрации данных применяется оператор `WHERE`, после которого указывается условие, на основании которого производится фильтрация:
 
 
 Если условие истинно, то строка попадает в результирующую выборку.
@@ -26,10 +25,10 @@
 
 ```sql
 SELECT * FROM Products
-WHERE Manufacturer = 'Apple';
+WHERE Company = 'Apple';
 ```
 
-Другой пример - найдем все товары, у которых цена меньше 29000:
+Другой пример - найдем все товары, у которых цена меньше `29000`:
 
 
 ```sql
@@ -37,7 +36,7 @@ SELECT * FROM Products
 WHERE Price < 39000;
 ```
 
-В качестве условия могут использоваться и более сложные выражения. Например, найдем все товары, у которых совокупная стоимость больше 90 000:
+В качестве условия могут использоваться и более сложные выражения. Например, найдем все товары, у которых совокупная стоимость больше `90 000`:
 
 ```sql
 SELECT * FROM Products
@@ -68,26 +67,26 @@ WHERE Price * ProductCount > 90000;
 
 ```sql
 SELECT * FROM Products
-WHERE Manufacturer = 'Samsung' AND Price > 50000;
+WHERE Company = 'Samsung' AND Price > 50000;
 
 ```
 
 
-Теперь изменим оператор на OR. 
+Теперь изменим оператор на `OR`. 
 
 То есть выберем все товары, у которых либо производитель Samsung, либо цена больше 50000:
 
 
 ```sql
 SELECT * FROM Products
-WHERE Manufacturer = 'Samsung' OR Price > 50000;
+WHERE Company = 'Samsung' OR Price > 50000;
 ```
 
 Применение оператора `NOT` - выберем все товары, у которых производитель не `Samsung`:
 
 ```sql
 SELECT * FROM Products
-WHERE NOT Manufacturer = 'Samsung';
+WHERE NOT Company = 'Samsung';
 ```
 
 Но в большинстве случае вполне можно обойтись без оператора `NOT`. 
@@ -97,14 +96,14 @@ WHERE NOT Manufacturer = 'Samsung';
 
 ```sql
 SELECT * FROM Products
-WHERE Manufacturer <> 'Samsung'
+WHERE Company <> 'Samsung'
 ```
 
 Также в одной команде `SELECT` можно использовать сразу несколько операторов:
 
 ```sql
 SELECT * FROM Products
-WHERE Manufacturer = 'Samsung' OR Price > 30000 AND ProductCount > 2;
+WHERE Company = 'Samsung' OR Price > 30000 AND ProductCount > 2;
 ```
 
 Так как оператор `AND` имеет более высокий приоритет, то сначала будет выполняться подвыражение `Price > 30000 AND ProductCount > 2`, и только потом оператор `OR`. 
@@ -115,7 +114,7 @@ WHERE Manufacturer = 'Samsung' OR Price > 30000 AND ProductCount > 2;
 
 ```sql
 SELECT * FROM Products
-WHERE (Manufacturer = 'Samsung' OR Price > 30000) AND ProductCount > 2;
+WHERE (Company = 'Samsung' OR Price > 30000) AND ProductCount > 2;
 ```
 
 

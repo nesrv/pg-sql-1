@@ -3,18 +3,20 @@
 
 Например, пусть ранее была создана таблица `Products`, и в нее добавлены некоторые начальные данные:
 
-```sql
+[Файл 2-1.sql](sql/2-1.sql)
 
+
+```sql
 CREATE TABLE Products
 (
     Id SERIAL PRIMARY KEY,
     ProductName VARCHAR(30) NOT NULL,
-    Manufacturer VARCHAR(20) NOT NULL,
+    Company VARCHAR(20) NOT NULL,
     ProductCount INTEGER DEFAULT 0,
     Price NUMERIC
 );
  
-INSERT INTO Products (ProductName, Manufacturer, ProductCount, Price)
+INSERT INTO Products (ProductName, Company, ProductCount, Price)
 VALUES
 ('iPhone X', 'Apple', 3, 36000),
 ('iPhone 8', 'Apple', 2, 41000),
@@ -44,15 +46,23 @@ SELECT ProductName, Price FROM Products;
 
 Причем третий столбец представляет значение столбца `Price`, умноженное на значение столбца `ProductCount`, то есть совокупную стоимость товара.
 
-С помощью оператора AS можно изменить название выходного столбца или определить его псевдоним:
+С помощью оператора `AS` можно изменить название выходного столбца или определить его псевдоним:
+
 ```sql
-SELECT ProductCount, Manufacturer, Price * ProductCount
+SELECT ProductCount, Company, Price * ProductCount
 FROM Products;
+```
 
+В данном случае результатом выборки являются данные по 3-м столбцам.
+Для первого столбца определяется псевдоним `Title`, хотя в реальности он будет представлять столбец `ProductName`. 
 
-SELECT ProductCount AS Title, 
-Manufacturer, 
-Price * ProductCount  AS TotalSum
+Второй столбец сохраняет свое название - `Company`. 
+
+Третий столбец `TotalSum`хранит произведение столбцов `ProductCount и Price`.
+
+```sql
+
+SELECT ProductCount AS Title, Company, Price * ProductCount  AS TotalSum
 FROM Products;
 
 ```
@@ -61,7 +71,7 @@ FROM Products;
 
 Для первого столбца определяется псевдоним `Title`, хотя в реальности он будет представлять столбец `ProductName`.
 
-Второй столбец сохраняет свое название - `Manufacturer`. Третий столбец `TotalSum` хранит произведение столбцов `ProductCount` и `Price`.
+Второй столбец сохраняет свое название - `Company`. Третий столбец `TotalSum` хранит произведение столбцов `ProductCount` и `Price`.
 
 
 ![alt text](img/image-16.png)

@@ -10,14 +10,14 @@ DELETE FROM имя_таблицы
 
 ```sql
 DELETE FROM Products
-WHERE Manufacturer='Apple';
+WHERE Company='Apple';
 ```
 
 Или удалим все товары, производителем которых является `HTC` и которые имеют цену меньше `35000`:
 
 ```sql
 DELETE FROM Products
-WHERE Manufacturer='HTC' AND Price < 15000;
+WHERE Company='HTC' AND Price < 15000;
 ```
 
 Если необходимо вовсе удалить все строки вне зависимости от условия, то условие можно не указывать:
