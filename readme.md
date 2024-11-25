@@ -1,4 +1,4 @@
-![alt text](image.png)
+![alt text](img/shift_logo.png)
 
 # ПРОГРАММА ОБУЧЕНИЯ
 ## по курсу «Анализ данных на языке SQL»
