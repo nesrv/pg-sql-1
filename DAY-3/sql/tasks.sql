@@ -48,3 +48,29 @@ ORDER BY Длительность DESC, city DESC;
 SELECT name, city, date_first, date_last
 FROM trip
 WHERE date_last - date_first  = (SELECT MIN(date_last - date_first) FROM trip );
+
+-- task 8
+SELECT name, city, date_first, date_last
+FROM trip
+WHERE EXTRACT(MONTH FROM  date_first) = EXTRACT(MONTH FROM  date_last)
+ORDER BY city, name;
+
+-- task 9
+SELECT to_char(date_first, 'Month') as Месяц, count(date_first) as Количество
+FROM trip
+GROUP BY Месяц
+ORDER BY Количество DESC, Месяц;
+
+-- task 10
+SELECT  name, city, date_first, (date_last - date_first ) * per_diem  as Сумма
+FROM trip
+WHERE EXTRACT(MONTH FROM  date_first) BETWEEN 2 and 3
+ORDER BY name, Сумма DESC; 
+
+-- task 11
+
+SELECT name, SUM((date_last- date_first) * per_diem) AS Сумма
+FROM trip
+GROUP by name
+HAVING count(name) > 3
+ORDER by 2 desc;
