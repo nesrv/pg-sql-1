@@ -125,22 +125,127 @@ DELETE FROM customers WHERE firstname ='Ольга';
 ![alt text](image-3.png)
 
 
-## поменяйте FULL JOIN на INNER JOIN 
+### Задание 2. Поменяйте FULL JOIN на INNER JOIN 
 
 
 ![alt text](image-4.png)
 
 
-## поменяйте INNER JOIN на LEFT JOIN
+### Задание 3. Поменяйте INNER JOIN на LEFT JOIN
 
 ![alt text](image-5.png)
 
-## поменяйте LEFT JOIN на RIGHT JOIN
+### Задание 4. Поменяйте LEFT JOIN на RIGHT JOIN
 
 ![alt text](image-6.png)
 
 
-## поменяйте RIGHT JOIN на JOIN
+## Поменяйте RIGHT JOIN на JOIN
 
-## поменяйте RIGHT JOIN на JOIN
+### Задание 5. Выберите  всех пользователей из `Customers`, у которых нет заказов в таблице `Orders`:
+
+```sql
+SELECT FirstName
+	FROM Customers
+	LEFT JOIN Orders
+		ON Customers.Id = Orders.CustomerId
+	WHERE Orders.CustomerId IS NULL;
+```
+
+![alt text](img/image-16.png)
+
+Также можно комбинировать `Inner Join` и `Outer Join`:
+
+
+```sql
+SELECT Customers.FirstName, Orders.CreatedAt, Products.ProductName, Products.Company
+
+	FROM Orders 
+	JOIN Products
+		ON Orders.ProductId = Products.Id AND Products.Price > 25000
+	LEFT JOIN Customers 
+	ON Orders.CustomerId = Customers.Id
+
+ORDER BY Orders.CreatedAt;
+
+```
+![alt text](img/image-18.png)
+
+
+Вначале по условию к таблице `Orders` через `Inner Join` присоединяется связанная информация из `Products`, затем через `Outer Join` добавляется информация из таблицы `Customers`.
+
+# Cross Join
+
+`Cross Join` или перекрестное соединение создает набор строк, где каждая строка из одной таблицы соединяется с каждой строкой из второй таблицы. 
+
+### Задание 6. Соедините таблицу заказов `Orders` и таблицу покупателей `Customers`:
+
+```sql
+SELECT * FROM Orders
+CROSS JOIN Customers;
+```
+
+![alt text](img/image-19.png)
+
+Если в таблице `Orders` 3 строки, а в таблице `Customers` то же три строки, то в результате перекрестного соединения создается `... * ... = ...` строк вне зависимости, связаны ли данные строки или нет.
+
+При неявном перекрестном соединении можно опустить оператор `CROSS JOIN` и просто перечислить все получаемые таблицы:
+
+```sql
+SELECT * FROM Orders, Customers;
+```
+
+
+# Группировка в соединениях
+
+Более сложным вариантом использования соединений `INNER/OUTER JOIN` представляет их сочетание с выражениями группировки, в частности, с оператором `GROUP BY`. 
+
+### Задание 7. Вывести для каждого покупателя количество заказов, которые он сделал:
+
+```sql
+SELECT FirstName, COUNT(Orders.Id)
+	FROM Customers
+	JOIN Orders 
+		ON Orders.CustomerId = Customers.Id
+GROUP BY Customers.Id, Customers.FirstName;
+```
+
+![alt text](img/image-20.png)
+
+Критерием группировки выступают `Id` и имя покупателя. 
+Выражение `SELECT` выбирает имя покупателя и количество заказов, используя столбец `Id` из таблицы `Orders`.
+
+Так как это `INNER JOIN`, то в группах будут только те покупатели, у которых есть заказы.
+
+### Задание 8. Получить покупателей, у которых нет заказов с помощью OUTER JOIN:
+
+```sql
+SELECT FirstName, COUNT(Orders.Id) 
+FROM Customers LEFT JOIN Orders 
+ON Orders.CustomerId = Customers.Id
+GROUP BY Customers.Id, Customers.FirstName
+HAVING COUNT(Orders.Id) > 0;
+
+```
+
+![alt text](img/image-21.png)
+
+```
+from —> where —> group by —> having —> select —> order by —> distinct —> top
+```
+
+
+### Задание 9. Dыведите товары с общей суммой сделанных заказов:
+
+```sql
+SELECT Products.ProductName, Products.Company, SUM(Orders.ProductCount * Orders.Price) AS TotalSum
+	FROM Products
+	LEFT JOIN Orders
+		ON Orders.ProductId = Products.Id 
+GROUP BY Products.Id, Products.ProductName, Products.Company
+HAVING SUM(Orders.ProductCount * Orders.Price) is NOT NULL
+ORDER by TotalSum
+
+```
+![alt text](image-7.png)
 
