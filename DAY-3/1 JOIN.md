@@ -2,6 +2,8 @@
 
 ### Создайте следующие три таблицы, которые связаны между собой связями:
 
+[Исходные данные - 1.sql](sql/source-1.sql)
+
 ```sql
 CREATE TABLE Products
 (
@@ -43,6 +45,7 @@ CREATE TABLE Orders
 Заполните таблицы данными:
 </a>
 
+[Исходные данные - 2.sql](sql/source-2.sql)
 
 ```sql
 INSERT INTO Products(ProductName, Company, ProductCount, Price) 
