@@ -36,3 +36,15 @@ class Book(Base):
     def __repr__(self):
         return f"Book(book_id={self.book_id}, title={self.title}, author_id={self.author_id}, genre_id={self.genre_id}, price={self.price}, amount={self.amount})"    
     
+class Supply(Base):
+    __tablename__ = "supply"
+
+    supply_id = Column(Integer, primary_key=True, index=True)
+    title = Column(Text)
+    author = Column(Integer)
+    price = Column(Numeric(10, 2))
+    amount = Column(Integer)
+
+    def __repr__(self):
+        return f"Supply(supply_id={self.supply_id}, title={self.title}, author={self.author}, price={self.price}, amount={self.amount})"
+    
