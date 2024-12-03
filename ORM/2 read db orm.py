@@ -49,6 +49,6 @@ def get_join_tables():
     
 
 
-     
+get_all_books()     
 get_aggregate()
 get_join_tables()
