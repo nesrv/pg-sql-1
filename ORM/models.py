@@ -43,8 +43,8 @@ class Book(Base):
     genre_id: Mapped[int] = mapped_column(ForeignKey("genre.genre_id"))
     price: Mapped[float]
     amount: Mapped[int]
-    author: Mapped["Author"] = relationship(backref="book")
-    genre: Mapped["Genre"] = relationship(backref="book")
+    author: Mapped["Author"] = relationship(back_populates="book")
+    genre: Mapped["Genre"] = relationship(back_populates="book")
 
     def __repr__(self):
         return f"Book(book_id={self.book_id}, title={self.title}, author_id={self.author_id}, genre_id={self.genre_id}, price={self.price}, amount={self.amount})"

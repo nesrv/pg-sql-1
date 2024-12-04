@@ -1,4 +1,4 @@
-from database import engine, session_factory
+from database import session_factory
 from models import Worker, Book
 
 
@@ -24,6 +24,6 @@ def update_book():
         # book.genre_id = 2
         s.commit()
 
-# update_book()
+update_book()
 
 
