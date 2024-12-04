@@ -50,17 +50,16 @@ def add_new_books():
         # authors = db.query(Author).all()
         
         for supply in supplies:
-            book = db.query(Book).filter(Book.title == supply.title).first()
-            
-        if book is None:
-            book = Book(
-                title=supply.title,
-                author_id=db.query(Author).filter(Author.name_author == supply.author).first().author_id,                    
-                price=supply.price,
-                amount=0
-            )
-            db.add(book)                
-            db.commit()
+            book = db.query(Book).filter(Book.title == supply.title).first()            
+            if book is None:
+                book = Book(
+                    title=supply.title,
+                    author_id=db.query(Author).filter(Author.name_author == supply.author).first().author_id,                    
+                    price=supply.price,
+                    amount=0
+                )
+                db.add(book)                
+                db.commit()
 
 
 add_new_books()

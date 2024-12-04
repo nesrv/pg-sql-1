@@ -40,7 +40,7 @@ class Book(Base):
     book_id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str]
     author_id: Mapped[int] = mapped_column(ForeignKey("author.author_id"))
-    genre_id: Mapped[int] = mapped_column(ForeignKey("genre.genre_id"))
+    genre_id: Mapped[int] = mapped_column(ForeignKey("genre.genre_id", ondelete='SET NULL'), default=None)
     price: Mapped[float]
     amount: Mapped[int]
     author: Mapped["Author"] = relationship(back_populates="book")
