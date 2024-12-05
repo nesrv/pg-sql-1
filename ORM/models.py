@@ -38,9 +38,11 @@ class Author(Base):
     author_id: Mapped[intpk]
     name_author: Mapped[str]
 
-    book = relationship('Book', back_populates="author",
-                        cascade="all, delete-orphan")
-
+    # book = relationship('Book', back_populates="author",
+    #                     cascade="all, delete-orphan")
+    
+    book : Mapped["Book"] = relationship(back_populates="author")
+    
     def __repr__(self):
         return f"Author(author_id={self.author_id}, name_author={self.name_author})"
 
