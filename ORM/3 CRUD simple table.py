@@ -1,3 +1,4 @@
+from sqlalchemy import select
 from database import engine, session_factory
 from models import Worker
 
@@ -19,6 +20,24 @@ def insert_worker():
 # insert_worker()
 
 
+def select_worker():
+    with session_factory() as s:
+        users = s.query(Worker).all()
+        print(users)
+
+# select_worker()
+
+
+def select_worker_2():
+    with session_factory() as s:
+       query = select(Worker)
+       result = s.execute(query)
+       workers = result.scalars().all()
+       print(workers)
+       
+select_worker_2()
+
+
 def update_worker():
     with session_factory() as s:
         user = s.query(Worker).filter_by(username="volk").first()
@@ -34,5 +53,5 @@ def del_worker():
         s.delete(user)
         s.commit()
     
-del_worker()
+# del_worker()
     

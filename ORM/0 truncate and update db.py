@@ -98,6 +98,13 @@ def fill_db():
             )
         db.commit()
 
+<<<<<<< HEAD
 # create_db()
 fill_db()
 # truncate_db()
+=======
+create_db()
+truncate_db()
+fill_db()
+
+>>>>>>> 048913f7a9cbb9875b7df388ca904db29e3339d0
