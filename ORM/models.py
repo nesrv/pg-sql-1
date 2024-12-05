@@ -17,6 +17,8 @@ class Worker(Base):
     worker_id: Mapped[intpk]
     username: Mapped[str]
 
+    def __repr__(self):
+        return f"Worker(worker_id={self.worker_id}, username={self.username})"
 
 class Genre(Base):
     __tablename__ = "genre"
@@ -58,6 +60,7 @@ class Book(Base):
     genre: Mapped["Genre"] = relationship(back_populates="book")
     # created_at: Mapped[created_at]
     # updated_at: Mapped[updated_at]
+    
     
     def __repr__(self):
         return f"Book(book_id={self.book_id}, title={self.title}, author_id={self.author_id}, genre_id={self.genre_id}, price={self.price}, amount={self.amount})"

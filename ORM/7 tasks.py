@@ -7,7 +7,7 @@
 
 from database import session_factory
 from models import Author, Genre, Book, Supply
-from sqlalchemy import func
+from sqlalchemy import Integer, cast, func, select
 
 
 def update_amount_from_supply():
@@ -106,9 +106,37 @@ def get_total_price():
     with session_factory() as db:
         total_price = db.query(Book.author_id, func.sum(
             Book.price * Book.amount)).group_by(Book.author_id).all()
-        total_price_by_authors = db.query(Author.name_author, func.count(Book.amount), func.sum(
-            Book.price * Book.amount)).join(Book).group_by(Author.name_author).all()
+        total_price_by_authors = db.query(Book.author_id, Author.name_author,
+                                          func.count(Book.amount),
+                                          func.avg(Book.price),
+                                          func.round(func.sum(Book.price * Book.amount) / func.count(Book.amount), 2)) \
+            .join(Book).group_by(Author.name_author)\
+            .order_by(func.count(Book.amount)).all()
         print(*total_price_by_authors)
 
 
 get_total_price()
+
+def get_total_price_2():
+    with session_factory() as db:
+        query = (
+            select(
+                Book.author_id,
+                cast(func.avg(Book.price), Integer).label("Средняя цена"),
+            )
+            .group_by(Book.author_id)
+        )
+       
+        # print(query.compile(compile_kwargs={"literal_binds": True}))
+        result = db.execute(query).all()
+        print(result)
+
+get_total_price_2()
+
+
+def test_without_group_by():
+    with session_factory() as db:
+        authors = db.query(Book.author).all()
+        print(authors)
+
+# test_without_group_by()
