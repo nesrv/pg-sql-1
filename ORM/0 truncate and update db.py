@@ -99,6 +99,6 @@ def fill_db():
         db.commit()
 
 create_db()
-# truncate_db()
+truncate_db()
 fill_db()
 
