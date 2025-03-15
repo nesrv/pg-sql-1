@@ -24,11 +24,21 @@ VALUES ('Баранов Павел'),
 DROP TABLE IF EXISTS attempt CASCADE;
 CREATE TABLE IF NOT EXISTS attempt
 (
-    attempt_id    INT    PRIMARY    KEY    GENERATED    ALWAYS AS    IDENTITY,
-    student_id    INT,
-    subject_id    INT,
-    date_attempt    DATE,
-    RESULT    INT
+    attempt_id
+    INT
+    PRIMARY
+    KEY
+    GENERATED
+    ALWAYS AS
+    IDENTITY,
+    student_id
+    INT,
+    subject_id
+    INT,
+    date_attempt
+    DATE,
+    RESULT
+    INT
 );
 
 INSERT INTO attempt(student_id, subject_id, date_attempt, result)
