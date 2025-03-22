@@ -5,3 +5,4 @@ __pycache__/
 tutorial_env/
 ~$*.docx
 ~$*.pptx
+venv
