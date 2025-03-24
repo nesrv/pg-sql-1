@@ -26,16 +26,19 @@ with Session(autoflush=False, bind=engine) as db:
     result = db.query(
         Subject.name_subject,
         Question.name_question,
-        Question.question_id.label("Вопрос"),
-        Answer.is_correct.label("Результат"))\
-            .join(Question, Subject.subject_id == Question.subject_id)\
-            .join(Answer, Question.question_id == Answer.question_id)\
-            .order_by(
-            Subject.name_subject,
-            Answer.is_correct.desc(),
-            Question.name_question.desc()
-       
+        Question.question_id.label("Вопрос"),        
+        func.round(func.avg(Answer.is_correct),2).label("Результат")
+    ).join(
+        Question, Subject.subject_id == Question.subject_id
+    ).join(
+        Answer, Question.question_id == Answer.question_id
+    ).group_by(
+        Subject.name_subject,
+        Question.name_question,
+        Question.question_id      
     ).all()
+
+    
     print(*result, sep="\n")
     # query = select(Subject).options(joinedload(Question.name_question))
     # result = db.execute(query)
