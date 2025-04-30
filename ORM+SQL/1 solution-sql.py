@@ -1,4 +1,4 @@
-from psycopg2_connect import get_connection
+from sql_connect import get_connection
 
 ## тест
 connection = get_connection()
