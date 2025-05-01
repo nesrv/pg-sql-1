@@ -40,4 +40,40 @@ with Session(engine) as session:
 
     # Выполняем запрос
     result = query.all()
-    print(15, *result)
+    # print(2, *result, sep="\n")
+
+
+with Session(engine) as session:
+    result = session.query(Product).order_by(Product.productname).limit(2).all()
+
+    print(3, *result, sep="\n")
+
+
+with Session(engine) as session:
+    result = (
+        session.query(Product).order_by(Product.productname).offset(2).limit(3).all()
+    )
+    # print(4, *result, sep="\n")
+
+
+with Session(engine) as session:
+    stmt = select(Product).offset(2).limit(3)
+    result = session.execute(stmt).scalars().all()
+    # print(41, *result, sep="\n")
+
+
+with Session(engine) as session:
+    stmt = select(Product).offset(2)
+    result = session.execute(stmt).scalars().all()
+    print(5, *result, sep="\n")
+
+with Session(engine) as session:
+    stmt = select(Product).offset(2).limit(None)  # эквивалент LIMIT ALL
+    result = session.execute(stmt).scalars().all()
+    print(51, *result, sep="\n")
+
+with Session(engine) as session:
+    result = session.query(Product) \
+        .offset(2) \
+        .all()
+    print(52, *result, sep="\n")
